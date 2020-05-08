@@ -1,17 +1,76 @@
-body, html {
+
+$bgcolor : rgb(40, 158, 255);
+
+html {
   font-family: "Roboto", sans-serif;
-  background: linear-gradient(to bottom, #87e0fd 0%,#53cbf1 40%,#05abe0 100%);
   height: 100%;
 }
 
-.logo {
-  background-image: url('./img/bar_logo.png');
-  width: 100px;
-  height: 100px;
-  background-repeat: no-repeat;
-  background-size: contain;
+body{
+  height: auto;
+  min-height: 100%;
+  background: $bgcolor;
 }
 
-.active {
-  color: pink;
+.post-list-item{
+  cursor: pointer;
 }
+
+.card{
+  border: none;
+}
+
+.post-image-container{
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(rgb(52, 106, 255), rgb(162, 210, 255));
+
+
+  border: none;
+}
+
+.post-image{
+  max-height: 350px;
+  width: auto;
+}
+
+.title-text{
+  font-size: 30px;
+}
+
+.content-text{
+  font-size: 20px;
+}
+
+.navbar{
+  margin-bottom: 200px;
+}
+
+.all-posts{
+  padding-top:  70px;
+}
+
+.post-container{
+  padding-top:  70px;
+}
+
+.newpost-container{
+  padding-top:  70px;
+}
+
+
+.card-bot{
+  margin: 0px;
+  padding: 0px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.card-button{
+  flex: 1;
+}
+
+.card-body{
+  padding-bottom: 40px;
+}
+
