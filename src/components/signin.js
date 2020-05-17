@@ -15,6 +15,7 @@ class SignIn extends Component {
     const user = {
       email, password,
     };
+    console.log('calling sign in');
     this.props.signinUser(user, this.props.history);
   }
 

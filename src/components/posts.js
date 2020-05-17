@@ -17,7 +17,8 @@ class Posts extends Component {
   }
 
   renderAuthor = (post) => {
-    if (post) {
+    if (post.author) {
+      console.log(JSON.stringify(post.author));
       return post.author.username;
     } else {
       return 'loading';

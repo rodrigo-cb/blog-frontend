@@ -1,8 +1,7 @@
 import axios from 'axios';
 
-
-const ROOT_URL = 'https://rodrigo-lab5.herokuapp.com/api';
-// const ROOT_URL = 'http://localhost:9090/api';
+// const ROOT_URL = 'https://rodrigo-lab5.herokuapp.com/api';
+const ROOT_URL = 'http://localhost:9090/api';
 
 // keys for actiontypes
 export const ActionTypes = {
@@ -64,6 +63,7 @@ export function fetchPost(id) {
 
 export function deletePost(id, history) {
   /* axios delete */
+  console.log('sending delete request');
   return (dispatch) => {
     axios.delete(`${ROOT_URL}/posts/${id}`, { headers: { authorization: localStorage.getItem('token') } }).then((response) => {
       history.push('/');
@@ -82,14 +82,19 @@ export function signinUser(user, history) {
   //  localStorage.setItem('token', response.data.token);
   // on error should dispatch(authError(`Sign In Failed: ${error.response.data}`));
   return (dispatch) => {
-    axios.post(`${ROOT_URL}/signim`, user)
+    axios.post(`${ROOT_URL}/signin`, user)
       .then((response) => {
+        console.log('signin response');
         dispatch({ type: ActionTypes.AUTH_USER });
         localStorage.setItem('token', response.data.token);
         history.push('/');
       })
       .catch((error) => {
-        dispatch({ type: ActionTypes.AUTH_ERROR, message: `Sign up Failed: ${error}` });
+        console.log(`signin error: ${error}`);
+
+        // eslint-disable-next-line no-alert
+        alert('Wrong Username or Password');
+        dispatch({ type: ActionTypes.AUTH_ERROR, message: `Sign in Failed: ${error}` });
       });
   };
 }
@@ -111,6 +116,8 @@ export function signupUser(user, history) {
         history.push('/');
       })
       .catch((error) => {
+        // eslint-disable-next-line no-alert
+        alert('Error Signing Up, verify Email is not already taken');
         dispatch({ type: ActionTypes.AUTH_ERROR, message: `Sign up Failed: ${error}` });
       });
   };

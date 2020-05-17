@@ -41,6 +41,14 @@ class Post extends Component {
     }
   }
 
+  handleDelete = () => {
+    if (this.props.authenticated) {
+      this.props.deletePost(this.props.currentPost._id, this.props.history);
+    } else {
+      console.log('not authenticated');
+    }
+  }
+
   render() {
     if (this.state.isEditing) {
       return (
@@ -88,7 +96,7 @@ class Post extends Component {
             <Card.Footer className="card-bot">
               <ButtonGroup aria-label="Edit/Delete" className="card-button">
                 <Button variant="primary" onClick={() => { this.setState({ isEditing: true }); }}>Edit</Button>
-                <Button variant="danger" onClick={() => { this.props.deletePost(this.props.currentPost._id, this.props.history); }}>Delete</Button>
+                <Button variant="danger" onClick={this.handleDelete}>Delete</Button>
               </ButtonGroup>
             </Card.Footer>
           </Card>
@@ -101,6 +109,7 @@ class Post extends Component {
 function mapStateToProps(reduxState) {
   return {
     currentPost: reduxState.posts.current,
+    authenticated: reduxState.auth.authenticated,
   };
 }
 
