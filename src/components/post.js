@@ -28,8 +28,17 @@ class Post extends Component {
     const post = {
       title, tags, content, coverUrl,
     };
-    this.props.updatePost(post, this.props.currentPost.id);
+    this.props.updatePost(post, this.props.currentPost._id);
     this.setState({ isEditing: false });
+  }
+
+  renderAuthor = () => {
+    const { author } = this.props.currentPost;
+    if (author) {
+      return author.username;
+    } else {
+      return '';
+    }
   }
 
   render() {
@@ -72,11 +81,14 @@ class Post extends Component {
               <Card.Text className="content-text">
                 {this.props.currentPost.content}
               </Card.Text>
+              <Card.Text className="author-text">
+                Author: {this.renderAuthor()}
+              </Card.Text>
             </Card.Body>
             <Card.Footer className="card-bot">
               <ButtonGroup aria-label="Edit/Delete" className="card-button">
                 <Button variant="primary" onClick={() => { this.setState({ isEditing: true }); }}>Edit</Button>
-                <Button variant="danger" onClick={() => { this.props.deletePost(this.props.currentPost.id, this.props.history); }}>Delete</Button>
+                <Button variant="danger" onClick={() => { this.props.deletePost(this.props.currentPost._id, this.props.history); }}>Delete</Button>
               </ButtonGroup>
             </Card.Footer>
           </Card>

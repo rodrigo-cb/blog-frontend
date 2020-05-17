@@ -16,11 +16,19 @@ class Posts extends Component {
     this.props.history.push(route);
   }
 
+  renderAuthor = (post) => {
+    if (post) {
+      return post.author.username;
+    } else {
+      return 'loading';
+    }
+  }
+
   render() {
     const postItems = this.props.posts.map((post) => {
-      const route = `/posts/${post.id}`;
+      const route = `/posts/${post._id}`;
       return (
-        <Card className="post-list-item" onClick={() => { this.openPost(route, post.id); }} key={post.id}>
+        <Card className="post-list-item" onClick={() => { this.openPost(route, post._id); }} key={post._id}>
           <Card.Img variant="top" src={post.coverUrl} />
           <Card.Body>
             <Card.Title>{post.title}</Card.Title>
@@ -28,6 +36,9 @@ class Posts extends Component {
               {post.tags}
             </Card.Text>
           </Card.Body>
+          <Card.Footer>
+            Author: {this.renderAuthor(post)}
+          </Card.Footer>
         </Card>
       );
     });
